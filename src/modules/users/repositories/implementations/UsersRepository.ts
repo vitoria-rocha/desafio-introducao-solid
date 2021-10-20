@@ -18,8 +18,30 @@ class UsersRepository implements IUsersRepository {
     return UsersRepository.INSTANCE;
   }
 
+  /*  const target = { a: 1, b: 2 };
+  const source = { b: 4, c: 5 };
+  
+  const returnedTarget = Object.assign(target, source);
+  
+  console.log(target);
+  // expected output: Object { a: 1, b: 4, c: 5 }
+  
+  console.log(returnedTarget);
+  // expected output: Object { a: 1, b: 4, c: 5 } */
+
   create({ name, email }: ICreateUserDTO): User {
-    // Complete aqui
+    const user = new User();
+
+    Object.assign(user, {
+      name,
+      email,
+      created_at: new Date(),
+      updated_at: new Date(),
+    });
+
+    this.users.push(user);
+
+    return user;
   }
 
   findById(id: string): User | undefined {
